@@ -69,7 +69,7 @@ Java_com_redleaves_serialport_SerialPort_serial_1port_1open(JNIEnv *env, jobject
     return fileDescriptor;
 }
 
-JNIEXPORT void JNICALL
+JNIEXPORT jboolean JNICALL
 Java_com_redleaves_serialport_SerialPort_serial_1port_1close(JNIEnv *env, jobject instance,
                                                              jobject fd) {
 
@@ -80,8 +80,10 @@ Java_com_redleaves_serialport_SerialPort_serial_1port_1close(JNIEnv *env, jobjec
 
     if (-1 == close(descriptor)) {
         LOGE("close failed");
-        return;
+        return JNI_FALSE;
     }
+
+    return JNI_TRUE;
 }
 
 JNIEXPORT void JNICALL

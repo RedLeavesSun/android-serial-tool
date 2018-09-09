@@ -6,11 +6,157 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/sendview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="SerialPort"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_serialport"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_weight="9"
+            android:gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SCAN" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="BaudRate"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_baudrate"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="DataBits"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_databits"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="Parity"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_patiry"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="StopBits"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/spinner_stopbits"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/open"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="OPEN" />
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="CLOSE" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="4dp"
+            android:text="Send"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/text_send"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:text="HelloWorld" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/send"
@@ -19,7 +165,11 @@
         android:text="SEND" />
 
     <TextView
-        android:id="@+id/receview"
+        android:id="@+id/text_rece"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="4dp"
+        android:background="@drawable/textview_border"
+        android:scrollbars="vertical"
+        android:textSize="16sp" />
 </LinearLayout>
