@@ -138,26 +138,69 @@ public class SerialPort {
     }
 
     public SerialPort(String path) {
-        this(path, BaudRate.B9600);
+        this(path, BaudRate.B9600, DataBits.Eight, Parity.None, StopBits.One);
     }
 
     public SerialPort(String path, BaudRate baudRate) {
-        this(path, baudRate, Parity.None);
+        this(path, BaudRate.B9600, DataBits.Eight, Parity.None, StopBits.One);
+    }
+
+    public SerialPort(String path, DataBits dataBits) {
+        this(path, BaudRate.B9600, dataBits, Parity.None, StopBits.One);
+    }
+
+    public SerialPort(String path, Parity parity) {
+        this(path, BaudRate.B9600, DataBits.Eight, parity, StopBits.One);
+    }
+
+    public SerialPort(String path, StopBits stopBits) {
+        this(path, BaudRate.B9600, DataBits.Eight, Parity.None, stopBits);
+    }
+
+    public SerialPort(String path, BaudRate baudRate, DataBits dataBits) {
+        this(path, BaudRate.B9600, dataBits, Parity.None, StopBits.One);
     }
 
     public SerialPort(String path, BaudRate baudRate, Parity parity) {
-        this(path, baudRate, parity, DataBits.Eight);
+        this(path, BaudRate.B9600, DataBits.Eight, parity, StopBits.One);
     }
 
-    public SerialPort(String path, BaudRate baudRate, Parity parity, DataBits dataBits) {
-        this(path, baudRate, parity, dataBits, StopBits.One);
+    public SerialPort(String path, BaudRate baudRate, StopBits stopBits) {
+        this(path, BaudRate.B9600, DataBits.Eight, Parity.None, stopBits);
     }
 
-    public SerialPort(String path, BaudRate baudRate, Parity parity, DataBits dataBits, StopBits stopBits) {
+    public SerialPort(String path, DataBits dataBits, Parity parity) {
+        this(path, BaudRate.B9600, dataBits, parity, StopBits.One);
+    }
+
+    public SerialPort(String path, DataBits dataBits, StopBits stopBits) {
+        this(path, BaudRate.B9600, dataBits, Parity.None, stopBits);
+    }
+
+    public SerialPort(String path, Parity parity, StopBits stopBits) {
+        this(path, BaudRate.B9600, DataBits.Eight, parity, stopBits);
+    }
+
+    public SerialPort(String path, BaudRate baudRate, DataBits dataBits, Parity parity) {
+        this(path, baudRate, dataBits, parity, StopBits.One);
+    }
+
+    public SerialPort(String path, BaudRate baudRate, DataBits dataBits, StopBits stopBits) {
+        this(path, baudRate, dataBits, Parity.None, stopBits);
+    }
+
+    public SerialPort(String path, BaudRate baudRate, Parity parity, StopBits stopBits) {
+        this(path, baudRate, DataBits.Eight, parity, stopBits);
+    }
+    public SerialPort(String path, DataBits dataBits, Parity parity, StopBits stopBits) {
+        this(path, BaudRate.B9600, dataBits, parity, stopBits);
+    }
+
+    public SerialPort(String path, BaudRate baudRate, DataBits dataBits, Parity parity, StopBits stopBits) {
         this.path = path;
         this.baudRate = baudRate;
-        this.parity = parity;
         this.dataBits = dataBits;
+        this.parity = parity;
         this.stopBits = stopBits;
     }
 
