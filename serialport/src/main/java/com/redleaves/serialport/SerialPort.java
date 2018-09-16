@@ -322,9 +322,13 @@ public class SerialPort {
     @Getter
     protected StopBits stopBits;
 
+    @Getter
+    protected InputStream inputStream;
+
+    @Getter
+    protected OutputStream outputStream;
+
     private FileDescriptor fd = null;
-    private InputStream inputStream;
-    private OutputStream outputStream;
 
 //    public event SerialErrorReceivedEventHandler ErrorReceived;
 //    public event SerialDataReceivedEventHandler DataReceived;
