@@ -192,6 +192,7 @@ public class SerialPort {
     public SerialPort(String path, BaudRate baudRate, Parity parity, StopBits stopBits) {
         this(path, baudRate, DataBits.Eight, parity, stopBits);
     }
+
     public SerialPort(String path, DataBits dataBits, Parity parity, StopBits stopBits) {
         this(path, BaudRate.B9600, dataBits, parity, stopBits);
     }
@@ -255,11 +256,11 @@ public class SerialPort {
 
     @Getter
     @Setter
-    protected int readBufferSize;
+    protected int readBufferSize = 1024;
 
     @Getter
     @Setter
-    protected int writeBufferSize;
+    protected int writeBufferSize = 1024;
 
     @Getter
     protected int bytesToRead;
