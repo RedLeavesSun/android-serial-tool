@@ -218,21 +218,40 @@ public class SerialPort {
     protected boolean dtrEnable;
 
     @Getter
+    @Setter
+    protected boolean rtsEnable;
+
+    @Getter
     protected boolean ctsHolding;
 
     @Getter
-    @Setter
-    protected boolean discardNull;
-
-    @Getter
-    protected boolean isOpen = false;
+    protected boolean cdHolding;
 
     @Getter
     protected boolean dsrHolding;
 
     @Getter
     @Setter
-    protected String newLine;
+    protected boolean discardNull;
+
+//    @Getter
+//    @Setter
+//    protected String newLine;
+//
+//    @Getter
+//    @Setter
+//    protected byte parityReplace;
+//
+//    @Getter
+//    @Setter
+//    protected int receivedBytesThreshold;
+//
+//    @Getter
+//    @Setter
+//    protected boolean breakState;
+//
+//    @Getter
+//    protected Stream baseStream;
 
     @Getter
     @Setter
@@ -240,14 +259,13 @@ public class SerialPort {
 
     @Getter
     @Setter
-    protected byte parityReplace;
+    protected int writeBufferSize;
 
     @Getter
-    @Setter
-    protected String path;
+    protected int bytesToRead;
 
     @Getter
-    protected boolean cdHolding;
+    protected int bytesToWrite;
 
     @Getter
     @Setter
@@ -255,32 +273,14 @@ public class SerialPort {
 
     @Getter
     @Setter
-    protected int receivedBytesThreshold;
-
-    @Getter
-    @Setter
-    protected boolean rtsEnable;
-
-    @Getter
-    @Setter
-    protected int writeBufferSize;
-
-    @Getter
-    @Setter
     protected int writeTimeout;
 
     @Getter
-    protected int bytesToRead;
-
-    @Getter
     @Setter
-    protected boolean breakState;
+    protected String path;
 
     @Getter
-    protected Stream baseStream;
-
-    @Getter
-    protected int bytesToWrite;
+    protected BaudRate baudRate;
 
     public void setBaudRate(BaudRate baudRate) {
         this.baudRate = baudRate;
@@ -290,7 +290,7 @@ public class SerialPort {
     }
 
     @Getter
-    protected BaudRate baudRate;
+    protected DataBits dataBits;
 
     public void setDataBits(DataBits dataBits) {
         this.dataBits = dataBits;
@@ -300,7 +300,7 @@ public class SerialPort {
     }
 
     @Getter
-    protected DataBits dataBits;
+    protected Parity parity;
 
     public void setParity(Parity parity) {
         this.parity = parity;
@@ -310,7 +310,7 @@ public class SerialPort {
     }
 
     @Getter
-    protected Parity parity;
+    protected StopBits stopBits;
 
     public void setStopBits(StopBits stopBits) {
         this.stopBits = stopBits;
@@ -320,13 +320,13 @@ public class SerialPort {
     }
 
     @Getter
-    protected StopBits stopBits;
-
-    @Getter
     protected InputStream inputStream;
 
     @Getter
     protected OutputStream outputStream;
+
+    @Getter
+    protected boolean isOpen = false;
 
     private FileDescriptor fd = null;
 
