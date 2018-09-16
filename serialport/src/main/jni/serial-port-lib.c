@@ -294,3 +294,127 @@ Java_com_redleaves_serialport_SerialPort_serial_1port_1set_1stopbits(JNIEnv *env
         return;
     }
 }
+
+JNIEXPORT void JNICALL
+Java_com_redleaves_serialport_SerialPort_serial_1port_1set_1read_1timeout(JNIEnv *env,
+                                                                          jobject instance,
+                                                                          jobject fd,
+                                                                          jint timeout) {
+
+    jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
+    jfieldID descriptorFieldID = (*env)->GetFieldID(env, FileDescriptorClass, "descriptor", "I");
+    jint descriptor = (*env)->GetIntField(env, fd, descriptorFieldID);
+
+    struct termios termios_p;
+    memset(&termios_p, 0, sizeof(struct termios));
+    if (-1 == tcgetattr(descriptor, &termios_p)) {
+        LOGE("fd: %d, tcgetattr failed", descriptor);
+        return;
+    }
+
+    if (timeout <= 255) {
+        LOGD("fd: %d, timeout: %d ms", descriptor, timeout * 100);
+        termios_p.c_cc[VTIME] = (unsigned char)timeout;
+    } else {
+        LOGE("fd: %d, timeout: %d ms, is greater than 25500 ms", descriptor, timeout * 100);
+        return;
+    }
+
+    if (-1 == tcsetattr(descriptor, TCSANOW, &termios_p)) {
+        LOGE("fd: %d, tcsetattr failed", descriptor);
+        return;
+    }
+}
+
+//JNIEXPORT void JNICALL
+//Java_com_redleaves_serialport_SerialPort_serial_1port_1set_1write_1timeout(JNIEnv *env,
+//                                                                           jobject instance,
+//                                                                           jobject fd,
+//                                                                           jint timeout) {
+//
+//    jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
+//    jfieldID descriptorFieldID = (*env)->GetFieldID(env, FileDescriptorClass, "descriptor", "I");
+//    jint descriptor = (*env)->GetIntField(env, fd, descriptorFieldID);
+//
+//    struct termios termios_p;
+//    memset(&termios_p, 0, sizeof(struct termios));
+//    if (-1 == tcgetattr(descriptor, &termios_p)) {
+//        LOGE("fd: %d, tcgetattr failed", descriptor);
+//        return;
+//    }
+//
+//    if (timeout <= 255) {
+//        LOGD("fd: %d, timeout: %d ms", descriptor, timeout * 100);
+//        termios_p.c_cc[VTIME] = timeout;
+//    } else {
+//        LOGE("fd: %d, timeout: %d ms, is greater than 25500 ms", descriptor, timeout * 100);
+//        return;
+//    }
+//
+//    if (-1 == tcsetattr(descriptor, TCSANOW, &termios_p)) {
+//        LOGE("fd: %d, tcsetattr failed", descriptor);
+//        return;
+//    }
+//}
+
+JNIEXPORT void JNICALL
+Java_com_redleaves_serialport_SerialPort_serial_1port_1set_1read_1bytes_1threshold(JNIEnv *env,
+                                                                                   jobject instance,
+                                                                                   jobject fd,
+                                                                                   jint readBytesThreshold) {
+
+    jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
+    jfieldID descriptorFieldID = (*env)->GetFieldID(env, FileDescriptorClass, "descriptor", "I");
+    jint descriptor = (*env)->GetIntField(env, fd, descriptorFieldID);
+
+    struct termios termios_p;
+    memset(&termios_p, 0, sizeof(struct termios));
+    if (-1 == tcgetattr(descriptor, &termios_p)) {
+        LOGE("fd: %d, tcgetattr failed", descriptor);
+        return;
+    }
+
+    if (readBytesThreshold <= 255) {
+        LOGD("fd: %d, rece bytes threshold: %d", descriptor, readBytesThreshold);
+        termios_p.c_cc[VMIN] = (unsigned char)readBytesThreshold;
+    } else {
+        LOGE("fd: %d, rece bytes threshold: %d, is greater than 255", descriptor, readBytesThreshold);
+        return;
+    }
+
+    if (-1 == tcsetattr(descriptor, TCSANOW, &termios_p)) {
+        LOGE("fd: %d, tcsetattr failed", descriptor);
+        return;
+    }
+}
+
+//JNIEXPORT void JNICALL
+//Java_com_redleaves_serialport_SerialPort_serial_1port_1set_1send_1bytes_1threshold(JNIEnv *env,
+//                                                                                   jobject instance,
+//                                                                                   jobject fd,
+//                                                                                   jint sendBytesThreshold) {
+//
+//    jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
+//    jfieldID descriptorFieldID = (*env)->GetFieldID(env, FileDescriptorClass, "descriptor", "I");
+//    jint descriptor = (*env)->GetIntField(env, fd, descriptorFieldID);
+//
+//    struct termios termios_p;
+//    memset(&termios_p, 0, sizeof(struct termios));
+//    if (-1 == tcgetattr(descriptor, &termios_p)) {
+//        LOGE("fd: %d, tcgetattr failed", descriptor);
+//        return;
+//    }
+//
+//    if (sendBytesThreshold <= 255) {
+//        LOGD("fd: %d, send bytes threshold: %d", descriptor, sendBytesThreshold);
+//        termios_p.c_cc[VMIN] = (unsigned char)sendBytesThreshold;
+//    } else {
+//        LOGE("fd: %d, send bytes threshold: %d, is greater than 255", descriptor, sendBytesThreshold);
+//        return;
+//    }
+//
+//    if (-1 == tcsetattr(descriptor, TCSANOW, &termios_p)) {
+//        LOGE("fd: %d, tcsetattr failed", descriptor);
+//        return;
+//    }
+//}

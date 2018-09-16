@@ -17,7 +17,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
-import java.util.stream.Stream;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -245,10 +244,6 @@ public class SerialPort {
 //
 //    @Getter
 //    @Setter
-//    protected int receivedBytesThreshold;
-//
-//    @Getter
-//    @Setter
 //    protected boolean breakState;
 //
 //    @Getter
@@ -269,12 +264,44 @@ public class SerialPort {
     protected int bytesToWrite;
 
     @Getter
-    @Setter
     protected int readTimeout;
 
+    public void setReadTimeout(int readTimeout) {
+        this.readTimeout = readTimeout;
+        if (isOpen) {
+            serial_port_set_read_timeout(fd, readTimeout);
+        }
+    }
+
+//    @Getter
+//    protected int writeTimeout;
+//
+//    public void setWriteTimeout(int writeTimeout) {
+//        this.writeTimeout = writeTimeout;
+//        if (isOpen) {
+//            serial_port_set_write_timeout(fd, writeTimeout);
+//        }
+//    }
+
     @Getter
-    @Setter
-    protected int writeTimeout;
+    protected int readBytesThreshold;
+
+    public void setReadBytesThreshold(int readBytesThreshold) {
+        this.readBytesThreshold = readBytesThreshold;
+        if (isOpen) {
+            serial_port_set_read_bytes_threshold(fd, readBytesThreshold);
+        }
+    }
+
+//    @Getter
+//    protected int writeBytesThreshold;
+//
+//    public void setWriteBytesThreshold(int writeBytesThreshold) {
+//        this.writeBytesThreshold = writeBytesThreshold;
+//        if (isOpen) {
+//            serial_port_set_write_bytes_threshold(fd, writeBytesThreshold)
+//        }
+//    }
 
     @Getter
     @Setter
@@ -426,4 +453,12 @@ public class SerialPort {
     protected native void serial_port_set_parity(FileDescriptor fd, int parity);
 
     protected native void serial_port_set_stopbits(FileDescriptor fd, int stopBits);
+
+    protected native void serial_port_set_read_timeout(FileDescriptor fd, int timeout);
+
+//    protected native void serial_port_set_write_timeout(FileDescriptor fd, int timeout);
+
+    protected native void serial_port_set_read_bytes_threshold(FileDescriptor fd, int readBytesThreshold);
+
+//    protected native void serial_port_set_write_bytes_threshold(FileDescriptor fd, int writeBytesThreshold);
 }
