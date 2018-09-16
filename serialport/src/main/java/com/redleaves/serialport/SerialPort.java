@@ -382,22 +382,6 @@ public class SerialPort {
         return 0;
     }
 
-    public int readByte() {
-        return 0;
-    }
-
-    public String readExisting() {
-        return new String();
-    }
-
-    public String readLine() {
-        return new String();
-    }
-
-    public String readTo(String value) {
-        return new String();
-    }
-
     public void write(byte[] buffer, int offset, int count) throws IOException {
         if (isOpen) {
             outputStream.write(buffer, offset, count);
@@ -405,14 +389,28 @@ public class SerialPort {
         }
     }
 
+    public byte readByte() throws IOException {
+        byte[] data = new byte[1];
+        if (read(data, 0, 1) > 0) {
+            return data[0];
+        } else {
+            throw new IOException("no data to read");
+        }
+    }
+
+    public void writeByte(byte data) throws IOException {
+        write(new byte[]{data}, 0, 1);
+    }
+
     public void write(String text) throws IOException {
         byte[] data = text.getBytes();
         write(data, 0, data.length);
     }
 
-    public void writeLine(String text) {
-
+    public void write(String text, String end) throws IOException {
+        write(text + end);
     }
+
 
 //    protected override void Dispose(bool disposing);
 
